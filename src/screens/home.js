@@ -12,10 +12,11 @@ import { primaryColor } from '../constants/colors';
 import SearchBox from '../components/searchBox';
 import SingleChip from '../components/singleChip';
 import SinglePlace from '../components/singlePlace';
-import {place1 } from '../constants/images';
-
+import {places} from '../shared/placesData';
 const Home = ({ navigation }) => {
+    
     const [selectedChip, setSelectedChip] = useState(0);
+
     const categories = [
         {title: 'All', selected: selectedChip == 0 ? true : false}, 
         {title: 'The place to be', selected: selectedChip == 1 ? true : false},
@@ -25,13 +26,6 @@ const Home = ({ navigation }) => {
         {title: 'Recommanded', selected: selectedChip == 5 ? true : false},
     ];
 
-    const places = [
-        {placeName: 'The Residence Tunis', location: 'Ikeja, Lagos, Nigeria', rating: '4.5', image: place1},
-        {placeName: 'The Residence Tunis', location: 'Ikeja, Lagos, Nigeria', rating: '4.5', image: place1},
-        {placeName: 'The Residence Tunis', location: 'Ikeja, Lagos, Nigeria', rating: '4.5', image: place1},
-        {placeName: 'The Residence Tunis', location: 'Ikeja, Lagos, Nigeria', rating: '4.5', image: place1},
-        {placeName: 'The Residence Tunis', location: 'Ikeja, Lagos, Nigeria', rating: '4.5', image: place1},
-    ];
 
     const handleChipSelection = (index) => {
         setSelectedChip(index);
@@ -56,12 +50,11 @@ const Home = ({ navigation }) => {
             <View>
                 <FlatList
                     data={places}
-                    renderItem={({item, index}) => <TouchableOpacity onPress={() => navigation.navigate("PlaceDetails")}><SinglePlace placeName={item.placeName} location={item.location} rating={item.rating} image={item.image}/></TouchableOpacity>}
-                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({item, index}) => <TouchableOpacity onPress={() => navigation.navigate("PlaceDetails", {i: index})}><SinglePlace placeName={item.placeName} location={item.location} rating={item.rating} image={{uri: item.image}}/></TouchableOpacity>}
+                    keyExtractor={(item, index) => item.id.toString()}
                     scrollEnabled={false}
                 />
             </View>
-
           
         </View>
         </ScrollView>

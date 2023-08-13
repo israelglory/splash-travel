@@ -17,7 +17,6 @@ const SinglePlace = ({placeName, location, rating, image}) => {
                     
                 </View>
                 <Text style={styles.placeSubTitle}>{location}</Text>
-                
             </View>
         </View>
     );

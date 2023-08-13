@@ -12,21 +12,11 @@ import { splashBg, globe } from '../constants/images';
 import { primaryColor } from '../constants/colors';
 
 const  SplashScreen = ({navigation}) => {
+
+
   const goToHome = () => {
     navigation.navigate('TabStack');
-}
-
-
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //       //navigation.navigate('Home');
-    //     }, 10000);
-    
-    //     // Clear the timeout when the component unmounts to avoid potential issues
-    //     return () => clearTimeout(timeout);
-    //   }, [navigation]);
-
-
+  }
 
     return (
           <View style = {styles.sectionContainer}>

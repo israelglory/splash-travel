@@ -1,14 +1,10 @@
-// React Native Bottom Navigation
-// https://aboutreact.com/react-native-bottom-navigation/
 import * as React from 'react';
 
 import
  MaterialCommunityIcons
 from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { primaryColor } from '../constants/colors';
 
 import HomeStack from './homeStack';
 import SearchScreen from '../screens/searchScreen';
@@ -26,22 +22,27 @@ function TabStack() {
           headerStyle: { backgroundColor: '#42f44b' },
           headerTintColor: '#fff',
           headerTitleStyle: { fontWeight: 'bold' },
-          tabBarActiveTintColor: 'tomato',
+          tabBarStyle: {
+           paddingTop: 10,
+           paddingBottom: 10,
+           height: 60,
+          },
+          tabBarActiveTintColor: primaryColor,
           tabBarInactiveTintColor: 'gray',
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === 'HomeStack') {
               iconName = focused
-                ? 'home-circle'
-                : 'home-circle-outline';
-            } else if (route.name === 'SettingsStack') {
+                ? 'web'
+                : 'web';
+            } else if (route.name === 'SearchStack') {
               iconName = focused
                 ? 'account-settings'
                 : 'account-settings-outline';
             }else if (route.name === 'FavouriteStack') {
               iconName = focused
-                ? 'account-settings'
-                : 'account-settings-outline';
+                ? 'heart'
+                : 'heart-outline';
             }else if (route.name === 'AccountStack') {
               iconName = focused
                 ? 'account-settings'
@@ -50,7 +51,7 @@ function TabStack() {
             return (
               <MaterialCommunityIcons
                 name={iconName}
-                size={size}
+                size={30}
                 color={color}
               />
             );
@@ -60,7 +61,7 @@ function TabStack() {
           name="HomeStack"
           component={HomeStack}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Explore',
             title: 'HomePage',
             headerShown: false,
 
