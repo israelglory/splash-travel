@@ -52,11 +52,11 @@ const Home = ({ navigation }) => {
                     showsHorizontalScrollIndicator={false}
                 />
             </View>
-
+            
             <View>
                 <FlatList
                     data={places}
-                    renderItem={({item, index}) => <SinglePlace placeName={item.placeName} location={item.location} rating={item.rating} image={item.image}/>}
+                    renderItem={({item, index}) => <TouchableOpacity onPress={() => navigation.navigate("PlaceDetails")}><SinglePlace placeName={item.placeName} location={item.location} rating={item.rating} image={item.image}/></TouchableOpacity>}
                     keyExtractor={(item, index) => index.toString()}
                     scrollEnabled={false}
                 />

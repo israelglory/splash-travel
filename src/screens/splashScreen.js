@@ -13,7 +13,7 @@ import { primaryColor } from '../constants/colors';
 
 const  SplashScreen = ({navigation}) => {
   const goToHome = () => {
-    navigation.navigate('Home');
+    navigation.navigate('TabStack');
 }
 
 
