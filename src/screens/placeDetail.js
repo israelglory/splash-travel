@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Button, ImageBackground, Image, Dimensions, FlatList, ScrollView } from "react-native";
 import {place1,star } from '../constants/images';
 import Divider from "../components/divider";
 import { places } from "../shared/placesData";
 import { primaryColor } from "../constants/colors";
+import ImageCarousel from "../components/carousel";
 
 
 const PlaceDetailsScreen = ({ navigation, route }) => {
@@ -13,23 +14,20 @@ const PlaceDetailsScreen = ({ navigation, route }) => {
 
       const renderItem = ({ item }) => (
         <View style={styles.item}>
-          <Image source={{uri: place.image}} style={styles.placeImg}/>
+          <Image source={{uri: item}} style={styles.placeImg}/>
         </View>
       );
+      const handleBack = () => {
+        navigation.goBack()
+      };
 
 
     return (
 
         <View style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
-                
-                    <ImageBackground source={{uri: place.image}} style={styles.image}>
-                        <View>
-                            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                                <Image source={require('../assets/images/back.png')} style={{width: 20, height: 20, resizeMode: 'contain'}}/>
-                            </TouchableOpacity>
-                        </View>
-                    </ImageBackground>
+                    <ImageCarousel images={place.images} onClose={handleBack}/>
+                    
                     <View style={styles.placeDetails}>
                         <View style={styles.placeRating}>
                                 <Text style={styles.placeTitle}>{place.placeName}</Text>
@@ -69,7 +67,7 @@ const PlaceDetailsScreen = ({ navigation, route }) => {
                     <FlatList
                             data={place.images}
                             renderItem={renderItem}
-                            keyExtractor={item => place.id}
+                            keyExtractor={item => place.images.indexOf(item)}
                             numColumns={2}
                             style={styles.container}
                             scrollEnabled={false}
@@ -112,9 +110,8 @@ const styles = StyleSheet.create({
         padding:0,
     },
     placeDetails: {
-        
         paddingHorizontal: 16,
-        paddingTop: 4,
+        paddingTop: 16,
         paddingBottom: 20,
     },
     placeTitle: {
